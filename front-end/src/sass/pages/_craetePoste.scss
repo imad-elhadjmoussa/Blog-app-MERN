@@ -1,0 +1,114 @@
+.createPost {
+
+    .title {
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 40rem;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        gap: 1.3rem;
+
+        .input {
+            border: 2px solid transparent;
+            // height: 2.5em;
+            padding: 0.7rem 1.4rem;
+            width: 100%;
+            outline: none;
+            overflow: hidden;
+            background-color: #F3F3F3;
+            border-radius: 10px;
+            transition: all 0.5s;
+
+            &:hover,
+            &:focus {
+                border: 2px solid $color-secondary;
+                box-shadow: 0 0 0 5px transparentize($color-primary, 0.8);
+                background-color: white;
+            }
+        }
+
+        .btns {
+            display: flex;
+            gap: 1rem;
+
+            .create {
+                flex: 1;
+                background-color: $color-secondary;
+                color: white;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: darken($color-secondary, 10%);
+                }
+            }
+
+            .reset {
+                flex: 1;
+                background-color: $color-quaternary;
+                color: $color-secondary;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: darken($color-quaternary, 5%);
+                }
+            }
+        }
+
+        .postPicture {
+            input{
+                padding: 5px;
+                align-items: text-center;
+                color: $color-secondary;
+                
+            }
+
+            input[type=file]::file-selector-button {
+                margin-right: 20px;
+                box-sizing: border-box;
+                width: 30%;
+                border: none;
+                background: $color-secondary;
+                padding: 8px 20px;      
+                height: 100%;          
+                // padding: 10px 20px;
+                border-radius: 5px;
+                color: #fff;
+                cursor: pointer;
+                transition: background .2s ease-in-out;
+            }
+        }
+
+        .ql-container {
+            background-color: #F3F3F3;
+            border-radius: 5px;
+            border: none;
+            color: $color-secondary;
+            font-size: 1rem;
+            padding: 0.2rem 1.4rem;
+            margin-top: 5px;
+
+        }
+
+        .ql-toolbar {
+            background-color: $color-quaternary;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            padding: 0.6rem 1.4rem;
+            width: 40rem;
+            width: 100%;
+        }
+
+        .ql-editor {
+            width: 100%;
+
+        }
+
+
+    }
+}

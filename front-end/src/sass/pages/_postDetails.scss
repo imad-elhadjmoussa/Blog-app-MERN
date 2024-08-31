@@ -1,0 +1,157 @@
+.postDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 3rem;
+
+    .edit {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+
+        button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: $color-quaternary;
+            color: $color-secondary;
+            font-size: 1rem;
+
+            &:hover {
+                background-color: darken($color-quaternary, $amount: 5%);
+            }
+
+            span {
+                display: inline-block;
+            }
+        }
+
+        .delete{
+            background-color: rgb(253, 82, 82);
+            color: white;
+            transition: 0.3s ease-in-out all;
+
+            &:hover {
+                background-color: darken(rgb(255, 71, 71), $amount: 5%);
+            }
+        }
+    }
+
+    .postInfo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: lighten($color: $color-primary, $amount: 10%);
+
+            img {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .date {
+            font-size: 1.1rem;
+            color: $color-secondary;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+    }
+
+    .postPhoto {
+        border-radius: 3px;
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .post {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .title {
+            font-size: 3.2rem;
+            font-weight: 500;
+            color: $color-primary;
+            text-align: start;
+            margin: 0;
+            width: 100%;
+        }
+
+        .summary {
+            font-size: 1.3rem;
+            color: $color-secondary;
+            width: 100%;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .content {
+            font-size: 1rem;
+            color: $color-secondary;
+            line-height: 1.5;
+            width: 100%;
+        }
+    }
+
+    .confirmDelete{
+        
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(61, 61, 61, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .box{
+            background-color: white;
+            padding: 3rem;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            color: $color-secondary;
+
+            p{
+                font-size: 1.4rem;
+                font-weight: 400;
+            }
+
+            .btns{
+                display: flex;
+                gap: 1rem;
+            }
+
+            .cancel{
+                background-color: $color-quaternary;
+                color: $color-secondary;
+            }
+
+            .delete{
+                background-color: rgb(253, 82, 82);
+                color: white;
+                transition: 0.3s ease-in-out all;
+
+                &:hover {
+                    background-color: darken(rgb(255, 71, 71), $amount: 5%);
+                }
+
+            }
+
+        }
+    }
+}

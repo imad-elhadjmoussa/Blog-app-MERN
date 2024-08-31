@@ -1,0 +1,60 @@
+.login {
+
+    h1 {
+        width: 100%;
+        text-align: center;
+        color: $color-primary;
+        margin-top: 3rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        max-width: 40rem;
+        margin: 0 auto;
+        margin-top: 2rem;
+
+        .btns {
+            display: flex;
+            gap: 1rem;
+
+            .login {
+                flex: 1;
+                background-color: $color-secondary;
+                color: white;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: darken($color-secondary, 10%);
+                }
+            }
+
+            .reset {
+                flex: 1;
+                background-color: $color-quaternary;
+                color: $color-secondary;
+                border-radius: 5px;
+                text-align: center;
+
+                &:hover {
+                    background-color: darken($color-quaternary, 5%);
+                }
+            }
+
+        }
+
+        p {
+            text-align: center;
+            color: $color-primary;
+
+            span {
+                display: inline-block;
+                color: $color-secondary;
+                text-decoration: underline;
+                padding-inline: 0.7rem;
+                font-weight: bold;
+            }
+        }
+    }
+}

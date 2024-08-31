@@ -1,0 +1,100 @@
+.register {
+    h1 {
+        width: 100%;
+        text-align: center;
+        color: $color-primary;
+        margin-top: 0.5rem;
+
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        max-width: 40rem;
+        margin: 0 auto;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+
+        .btns {
+            display: flex;
+            gap: 1rem;
+
+            .register {
+                flex: 1;
+                background-color: $color-secondary;
+                color: white;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: darken($color-secondary, 10%);
+                }
+            }
+
+            .reset {
+                flex: 1;
+                background-color: $color-quaternary;
+                color: $color-secondary;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: darken($color-quaternary, 5%);
+                }
+            }
+        }
+
+        .userAvatar {
+            .input {
+                border: 2px solid transparent;
+                // height: 2.5em;
+                padding: 5px;
+                width: 100%;
+                outline: none;
+                overflow: hidden;
+                background-color: #F3F3F3;
+                border-radius: 10px;
+                transition: all 0.5s;
+
+                &:hover,
+                &:focus {
+                    border: 2px solid $color-secondary;
+                    box-shadow: 0 0 0 5px transparentize($color-primary, 0.8);
+                    background-color: white;
+                }
+            }
+
+            input {
+                align-items: text-center;
+                color: $color-secondary;
+            }
+
+            input[type=file]::file-selector-button {
+                margin-right: 20px;
+                box-sizing: border-box;
+                width: 30%;
+                border: none;
+                background: $color-secondary;
+                padding: 8px 20px;
+                height: 100%;
+                // padding: 10px 20px;
+                border-radius: 5px;
+                color: #fff;
+                cursor: pointer;
+                transition: background .2s ease-in-out;
+            }
+        }
+
+        p {
+            text-align: center;
+            color: $color-primary;
+
+            span {
+                display: inline-block;
+                color: $color-secondary;
+                text-decoration: underline;
+                padding-inline: 0.7rem;
+                font-weight: bold;
+            }
+        }
+    }
+}

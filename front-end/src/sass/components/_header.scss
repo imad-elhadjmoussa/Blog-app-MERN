@@ -1,0 +1,66 @@
+.header {
+    nav {
+        padding-block: 0.9rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .avatar {
+            display: none;
+
+            @include media-breakpoint(md) {
+                display: block;
+            }
+            img {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .btns {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+
+            button {
+                background-color: $color-tertiary;
+                color: $color-secondary;
+
+                &:hover {
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+            }
+
+            .logout{
+                background-color: rgb(251, 72, 72);
+                color: white;
+                transition: all 0.3s;
+
+                &:hover {
+                    background-color: rgb(255, 90, 90);
+                }
+            }
+
+            .create{
+                color: $color-secondary;
+                font-weight: 500;
+                transition: all 0.3s;
+
+                &:hover {
+                    color: $color-primary;
+                }
+            }
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: $color-primary;
+        }
+
+    }
+
+
+}

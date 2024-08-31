@@ -1,0 +1,120 @@
+import { formatISO9075 } from 'date-fns';
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom';
+import { appContext } from '../App';
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from 'framer-motion';
+import { useErrorContext } from '../hooks/useErrorContext';
+import { useAuth } from '../hooks/useAuth';
+import useFetch from '../hooks/useFetch';
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { PostDetailsSkelton } from '../Skeltons/PostDetailsSkelton';
+import { Error } from '../components/Error';
+import { deletePost } from '../apis/post';
+
+export const PostDetails = () => {
+    const { id } = useParams();
+    const { user } = useAuth();
+    const [confirmDelete, setConfirmDelete] = useState(false);
+
+    const { data: post, isLoading, error } = useQuery({
+        queryKey: ['posts', id],
+        queryFn: async () => {
+            const response = await fetch(`http://localhost:4000/posts/${id}`);
+            const data = await response.json();
+            return data.data.post;
+        },
+    });
+
+    const { mutate: deletePostMutate } = useMutation({
+        mutationFn: (id) => deletePost(id),
+        onSuccess: () => {
+            setConfirmDelete(false);
+            window.location.replace('/');
+        },
+    })
+
+    if (isLoading) {
+        return <PostDetailsSkelton />
+    }
+
+    if (error) {
+        return <Error error={error.message} />
+    }
+
+
+    return (
+        <motion.section
+            className='postDetails'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            {
+                (user?.id === post?.author?._id) &&
+                <div className='edit'>
+                    <Link to={`/post/edit/${id}`}>
+                        <button className='btn'>
+                            <span>
+                                <FontAwesomeIcon icon={faPenToSquare} />
+                            </span>
+                            <span>
+                                Edit Post
+                            </span>
+                        </button>
+                    </Link>
+
+                    <button onClick={() => { setConfirmDelete(true) }} className='btn delete'>
+                        <FontAwesomeIcon icon={faTrash} />
+                        <span>Delete Post</span>
+                    </button>
+                </div>
+            }
+
+            <div className='postInfo'>
+                <Link to={`/profile/${post?.author?._id}`}>
+                    <div className='author'>
+                        <img src={`http://localhost:4000/${post?.author?.avatar}`} alt="" />
+                        <p>{post?.author?.username}</p>
+                    </div>
+                </Link>
+
+                <p className='date'>
+                    {formatISO9075(new Date(post?.date || 0)).split(" ").reverse().map((item, index) => {
+                        return (<span key={index}> {item} </span>)
+                    })
+                    }
+                </p>
+
+            </div>
+
+            <img className='postPhoto' src={`http://localhost:4000/${post?.photo}`} alt="" />
+
+            <div className='post'>
+                <h1 className='title'>{post?.title}</h1>
+                <h3 className='summary'>{post?.summary}</h3>
+                <div className='content'>  {post?.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}  </div>
+            </div>
+
+            {
+                confirmDelete &&
+                <motion.div
+                    className=' confirmDelete'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                >
+                    <div className='box'>
+                        <p>Do you want to delete his post?</p>
+                        <div className='btns'>
+                            <button onClick={() => { deletePostMutate(post?._id) }} className='btn delete'>Delete</button>
+                            <button className='btn cancel' onClick={() => { setConfirmDelete(false) }}>Cancel</button>
+                        </div>
+                    </div>
+                </motion.div>
+            }
+
+        </motion.section>
+    )
+}

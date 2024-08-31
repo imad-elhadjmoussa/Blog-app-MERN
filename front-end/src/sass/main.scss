@@ -1,0 +1,22 @@
+//variables
+@import "./variables";
+// css normalizes
+@import "./reset";
+// global styles
+@import "./globals";
+// helper
+@import "./helper";
+// components
+@import "./components/header";
+@import "./components/post";  
+@import "./components/inpute";
+@import "./components/error"; 
+// pages
+@import "./pages/login"; 
+@import "./pages/register";
+@import "./pages/craetePoste";
+@import "./pages/postDetails";
+@import "./pages/profile";
+// Skeletons
+@import "./Skeltons/post";
+@import "./Skeltons/postDetails";

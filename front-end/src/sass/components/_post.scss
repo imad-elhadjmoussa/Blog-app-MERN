@@ -1,0 +1,102 @@
+.post {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2.4rem;
+
+    @include media-breakpoint(md) {
+        flex-direction: row;
+    }
+
+    .image {
+        width: 100%;
+
+        @include media-breakpoint(md) {
+            width: 50%;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 2.5px;
+            height: 320px;
+            animation: sekeleton-loading 2s infinite alternate;
+
+        }
+
+        @keyframes sekeleton-loading {
+            0% {
+                background-color: $color-tertiary;
+            }
+
+            100% {
+                background-color: lighten($color: $color-tertiary, $amount: 10%);
+            }
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-block: 10px;
+        width: 100%;
+
+        @include media-breakpoint(md) {
+            width: 50%;
+        }
+
+        text-align: justify;
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: $color-primary;
+            text-align: start;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 1.1rem;
+            color: lighten($color: $color-primary, $amount: 20%);
+            font-weight: 500;
+
+
+            .author {
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+                font-size: 1rem;
+
+                .dateUsername {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.2rem;
+                }
+
+                .date {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
+        .summary {
+            font-size: 1rem;
+            color: $color-secondary;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            overflow: hidden;
+            max-height: 200px;
+            text-overflow: ellipsis;
+        }
+    }
+}
