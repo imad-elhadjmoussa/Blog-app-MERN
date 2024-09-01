@@ -10,17 +10,18 @@ import { useQuery } from '@tanstack/react-query';
 import { getUser } from '../apis/user';
 import { getPosts } from '../apis/post';
 import { PostSkelton } from '../Skeltons/PostSkelton';
+import { ProfileSkeleton } from '../Skeltons/ProfileSkeleton';
 
 export const Profile = () => {
     const { id } = useParams();
-    const limit = 5; 
+    const limit = 5;
 
-    const { data: posts,isLoading:postsLoading } = useQuery({
+    const { data: posts, isLoading: postsLoading } = useQuery({
         queryKey: ['posts', id, limit],
         queryFn: () => getPosts(id, limit),
     })
 
-    const { data: user } = useQuery({
+    const { data: user, isLoading: userLoading } = useQuery({
         queryKey: ['user', id],
         queryFn: () => getUser(id),
     })
@@ -28,22 +29,23 @@ export const Profile = () => {
     return (
         <motion.section
             className='profile'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            exit={{ opacity: 0 }}
         >
-            <div className='info'>
-                <div className='profileImage'>
-                    <img src={`http://localhost:4000/${user?.avatar}`} alt={user?.username} />
-                </div>
-                <div>
-                    <h1> {user?.username} </h1>
-                    <p className='email'>
-                        {user?.email}
-                    </p>
-                </div>
-            </div>
+            {
+                userLoading ?
+                    <ProfileSkeleton />
+                    :
+                    <div className='info'>
+                        <div className='profileImage'>
+                            <img src={`http://localhost:4000/${user?.avatar}`} alt={user?.username} />
+                        </div>
+                        <div>
+                            <h1> {user?.username} </h1>
+                            <p className='email'>
+                                {user?.email}
+                            </p>
+                        </div>
+                    </div>
+            }
 
             <div className='latestPosts'>
                 <h1>Latest Posts</h1>
@@ -58,7 +60,7 @@ export const Profile = () => {
                             return <PostSkelton key={n} />
                         })
                     }
-                    
+
                 </div>
             </div>
         </motion.section >

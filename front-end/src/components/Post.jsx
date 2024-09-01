@@ -1,13 +1,23 @@
 import React from 'react'
 import { format, formatISO9075 } from "date-fns"
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-export const Post = ({ post }) => {
+
+export const Post = ({ post, isLoading }) => {
     return (
-        <div className='post'>
+        <motion.div
+            className='post'
+        >
             <div className='image'>
                 <Link to={`/post/${post._id}`}  >
-                    <img src={`http://localhost:4000/${post?.photo}`} alt="" />
+                    {/* <img src={`http://localhost:4000/${post?.photo}`} alt="" /> */}
+                    <LazyLoadImage
+                        src={`http://localhost:4000/${post?.photo}`}
+                        alt=""
+                        effect="blur"
+                    />
                 </Link>
             </div>
 
@@ -24,6 +34,6 @@ export const Post = ({ post }) => {
                 </div>
                 <p className='summary'> {post?.summary} </p>
             </div>
-        </div>
+        </motion.div>
     )
 }

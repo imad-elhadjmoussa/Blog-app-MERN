@@ -1,24 +1,22 @@
 import React from 'react'
+import Skeleton from '@mui/material/Skeleton';
 
 export const PostSkelton = () => {
     return (
         <div className='postSkelton'>
-            <div className='image '>
-                <div className='skelton'></div>
-            </div>
-
+            <Skeleton className='image' variant="rectangular" height={"320px"} />
             <div className='content '>
-                <h2 className='title skelton'></h2>
+                <Skeleton variant="text" sx={{ fontSize: '3rem' }} />
                 <div className="info ">
                     <div className='author '>
-                        <div className="avatar skelton"></div >
+                        <Skeleton variant="circular" width={"45px"} height={"45px"} />
                         <div className='dateUsername '>
-                            <p className='username skelton'> </p>
-                            <p className='date skelton'>  </p>
+                            <Skeleton variant="text" sx={{ fontSize: '1.3rem' }} width={"100px"} />
+                            <Skeleton variant="text" sx={{ fontSize: '1.3rem' }} width={"100px"} />
                         </div>
                     </div>
                 </div>
-                <p className='summary skelton'>  </p>
+                <Skeleton variant="rectangular" width={"100%"} height={"150px"} />
             </div>
         </div>
     )

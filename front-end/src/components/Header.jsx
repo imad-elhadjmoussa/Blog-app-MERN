@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from './../hooks/useAuth';
 import { useLogout } from '../hooks/useLogout';
+import { Skeleton } from '@mui/material';
 
 export const Header = () => {
 
-    const { user } = useAuth();
+    const { user,isLoading } = useAuth();
     const { logout } = useLogout();
 
     return (
@@ -25,7 +26,9 @@ export const Header = () => {
                         </Link>
 
                         {
-                            user &&
+                            isLoading ?
+                            <Skeleton className='avatar' variant="circular" width={40} height={40} /> 
+                            :
                             <Link className='avatar' to={`profile/${user.id}`} >
                                 <img src={`http://localhost:4000/${user?.avatar}`} alt="" />
                             </Link>

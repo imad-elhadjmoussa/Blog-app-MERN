@@ -26,6 +26,7 @@ export const Home = () => {
                         <Post
                             key={index}
                             post={post}
+                            isLoading={isLoading}
                         />
                     )
 

@@ -11,7 +11,7 @@ import useFetch from '../hooks/useFetch';
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { PostDetailsSkelton } from '../Skeltons/PostDetailsSkelton';
 import { Error } from '../components/Error';
-import { deletePost } from '../apis/post';
+import { deletePost, getPost, getPosts } from '../apis/post';
 
 export const PostDetails = () => {
     const { id } = useParams();
@@ -20,11 +20,7 @@ export const PostDetails = () => {
 
     const { data: post, isLoading, error } = useQuery({
         queryKey: ['posts', id],
-        queryFn: async () => {
-            const response = await fetch(`http://localhost:4000/posts/${id}`);
-            const data = await response.json();
-            return data.data.post;
-        },
+        queryFn: () => getPost(id),
     });
 
     const { mutate: deletePostMutate } = useMutation({
@@ -94,7 +90,11 @@ export const PostDetails = () => {
             <div className='post'>
                 <h1 className='title'>{post?.title}</h1>
                 <h3 className='summary'>{post?.summary}</h3>
-                <div className='content'>  {post?.content.replace(/</g, "&lt;").replace(/>/g, "&gt;")}  </div>
+                <div
+                    dangerouslySetInnerHTML={{ __html: post?.content }}
+                    className='content'
+                >
+                </div>
             </div>
 
             {

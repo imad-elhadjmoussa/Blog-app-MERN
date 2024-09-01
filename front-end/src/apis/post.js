@@ -2,6 +2,9 @@ export const getPosts = async (author_id, limit) => {
     try {
         const res = await fetch(`http://localhost:4000/posts?author=${author_id}&limit=${limit}`);
         const data = await res.json();
+        if (!res.ok) {
+            throw new Error(data.message);
+        }
         return data.data.posts;
     } catch (error) {
         console.log(error.message);
@@ -13,6 +16,9 @@ export const getPost = async (id) => {
     try {
         const res = await fetch(`http://localhost:4000/posts/${id}`);
         const data = await res.json();
+        if (!res.ok) {
+            throw new Error(data.message);
+        }
         return data.data.post;
     } catch (error) {
         console.log(error.message);
@@ -32,6 +38,9 @@ export const createPost = async (post) => {
             credentials: 'include',
         });
         const data = await res.json();
+        if (!res.ok) {
+            throw new Error(data.message);
+        }
         return data.data.post;
     } catch (error) {
         console.log(error.message);
@@ -44,6 +53,9 @@ export const deletePost = async (id) => {
             method: 'DELETE',
             credentials: 'include',
         });
+        if (!res.ok) {
+            throw new Error('Something went wrong!');
+        }
         return res.ok;
     } catch (error) {
         console.log(error.message);
@@ -63,6 +75,9 @@ export const editPost = async (id, post) => {
             credentials: 'include',
         });
         const data = await res.json();
+        if (!res.ok) {
+            throw new Error(data.message);
+        }
         return data.data.post;
     } catch (error) {
         console.log(error.message);

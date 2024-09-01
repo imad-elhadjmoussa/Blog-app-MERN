@@ -1,4 +1,5 @@
 .postDeatilsSkelton {
+    margin-bottom: 2rem;
 
     display: flex;
     flex-direction: column;
@@ -14,35 +15,15 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-
-            .username{
-                width: 100px;
-                height: 20px;
-            }
-
-            .avatar {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-            }
         }
 
         .date {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 1rem;
+            gap: 0.5rem;
 
-            div{
-                width: 100px;
-                height: 20px;
-            }
         }
-    }
-
-    .postPhoto {
-        border-radius: 3px;
-        height: 400px;
     }
 
 }

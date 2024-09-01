@@ -1,5 +1,7 @@
 import { createContext, useEffect, useReducer, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 export const AuthContext = createContext();
+
 
 export const AUTH_ACTIONS = {
     LOGIN: 'LOGIN',
@@ -28,7 +30,7 @@ export const AuthProvider = ({ children }) => {
         user: null,
     });
 
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
 
     const profile = async () => {
         try {
@@ -38,25 +40,31 @@ export const AuthProvider = ({ children }) => {
             })
             if (!res.ok) {
                 dispatch({ type: 'LOGOUT' });
-                setLoading(false);
+                // setLoading(false);
             }
             if (res.ok) {
                 const data = await res.json();
                 dispatch({ type: 'LOGIN', payload: data.data.user });
-                setLoading(false);
+                // setLoading(false);
             }
         } catch (error) {
             console.log(error.message);
-            setLoading(false);
+            // setLoading(false);
         }
     }
-    useEffect(() => {
-        profile();
-    }
-        , []);
+    // useEffect(() => {
+    //     profile();
+    // }
+    //     , []);
+
+    const { isLoading } = useQuery({
+        queryKey: 'profile',
+        queryFn: profile,
+
+    })
 
     return (
-        <AuthContext.Provider value={{ ...state,loading, dispatch }}>
+        <AuthContext.Provider value={{ ...state, isLoading, dispatch }}>
             {children}
         </AuthContext.Provider>
     );
