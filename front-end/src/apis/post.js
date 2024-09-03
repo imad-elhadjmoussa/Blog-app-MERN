@@ -1,11 +1,13 @@
-export const getPosts = async (author_id, limit) => {
+export const getPosts = async (params) => {
     try {
-        const res = await fetch(`http://localhost:4000/posts?author=${author_id}&limit=${limit}`);
+        const query = new URLSearchParams(params).toString();
+        const res = await fetch(`http://localhost:4000/posts?${query}`);
         const data = await res.json();
         if (!res.ok) {
             throw new Error(data.message);
         }
-        return data.data.posts;
+        console.log(data);
+        return data.data;
     } catch (error) {
         console.log(error.message);
     }

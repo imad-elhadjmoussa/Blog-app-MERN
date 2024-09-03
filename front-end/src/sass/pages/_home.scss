@@ -1,0 +1,18 @@
+.home{
+
+    .loadMore{
+        margin: auto;
+        text-align: center;
+        margin-block: 50px;
+        color: $color-secondary;
+        font-size: 1.1rem;
+        cursor: pointer;
+        text-decoration: underline;
+        transition: all 0.3s;
+
+        &:hover{
+            color: darken($color: $color-secondary, $amount: 50);
+        }
+    }
+
+}

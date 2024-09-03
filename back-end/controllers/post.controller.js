@@ -16,13 +16,14 @@ const createPost = async (req, res) => {
 }
 
 const getPosts = async (req, res) => {
-    const { author, limit } = req.query;
+    const { skip, limit, page, hasMore } = req.pagination;
+    const { author } = req.query;
     if (author) {
-        const posts = await Post.find({ author }).populate("author").sort({ date: -1 }).limit(parseInt(limit) || 5);
-        return res.json({ success: "success", message: "Posts fetched successfully", data: { posts } });
+        const posts = await Post.find({ author }).skip(skip).populate("author").sort({ date: -1 }).limit(parseInt(limit));
+        return res.json({ success: "success", message: "Posts fetched successfully", data: { posts: posts, hasMore }});
     }
-    const posts = await Post.find().populate("author").sort({ date: -1 }).limit(parseInt(limit) || 5);
-    res.json({ success: "success", message: "Posts fetched successfully", data: { posts } });
+    const posts = await Post.find().skip(skip).populate("author").sort({ date: -1 }).limit(limit);
+    res.json({ success: "success", message: "Posts fetched successfully", data: { posts: posts, hasMore } });
 }
 
 const getPost = async (req, res) => {
