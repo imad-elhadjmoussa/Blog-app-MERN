@@ -1,7 +1,7 @@
 .profile {
     display: flex;
     flex-direction: column;
-    margin-block: 3rem;
+    margin-top: 3rem;
 
     .info {
         display: flex;
@@ -14,7 +14,8 @@
             border-radius: 50%;
             object-fit: cover;
         }
-        h1{
+
+        h1 {
             margin: 0;
         }
 
@@ -24,13 +25,27 @@
         }
     }
 
-    .latestPosts{
-        h1{
+    .latestPosts {
+        h1 {
             font-size: 3rem;
         }
+
         margin-top: 2rem;
-        
+
     }
 
-   
+    .loadMore {
+        margin: auto;
+        text-align: center;
+        margin-block: 50px;
+        color: $color-secondary;
+        font-size: 1.1rem;
+        cursor: pointer;
+        text-decoration: underline;
+        transition: all 0.3s;
+
+        &:hover {
+            color: darken($color: $color-secondary, $amount: 50);
+        }
+    }
 }

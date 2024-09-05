@@ -28,7 +28,7 @@ export const CreatePoste = () => {
         setPost({ ...post, [e.target.name]: e.target.value });
     }
 
-    const { mutate: cratePostMutate } = useMutation({
+    const { mutate: cratePostMutate,isPending } = useMutation({
         mutationFn: () => createPost({ ...post, content: value }),
         onSuccess: () => {
             navigation('/')
@@ -64,7 +64,7 @@ export const CreatePoste = () => {
                 </div>
 
                 <div className='btns'>
-                    <button type='button' onClick={cratePostMutate} className="btn create">Create Post</button>
+                    <button disabled={isPending} type='button' onClick={cratePostMutate} className="btn create">Create Post</button>
                     <button type='reset' className="btn reset">Reset</button>
                 </div>
             </form>

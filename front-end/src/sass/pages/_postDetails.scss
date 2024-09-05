@@ -26,7 +26,7 @@
             }
         }
 
-        .delete{
+        .delete {
             background-color: rgb(253, 82, 82);
             color: white;
             transition: 0.3s ease-in-out all;
@@ -67,10 +67,12 @@
         }
     }
 
-    .postPhoto {
-        border-radius: 3px;
+    .postImageContainer {
         height: 400px;
-        object-fit: cover;
+
+        .postImage {
+            border-radius: 3px;
+        }
     }
 
     .post {
@@ -103,8 +105,8 @@
         }
     }
 
-    .confirmDelete{
-        
+    .confirmDelete {
+
         position: fixed;
         top: 0;
         left: 0;
@@ -116,7 +118,7 @@
         justify-content: center;
         align-items: center;
 
-        .box{
+        .box {
             background-color: white;
             padding: 3rem;
             border-radius: 5px;
@@ -126,22 +128,22 @@
             align-items: center;
             color: $color-secondary;
 
-            p{
+            p {
                 font-size: 1.4rem;
                 font-weight: 400;
             }
 
-            .btns{
+            .btns {
                 display: flex;
                 gap: 1rem;
             }
 
-            .cancel{
+            .cancel {
                 background-color: $color-quaternary;
                 color: $color-secondary;
             }
 
-            .delete{
+            .delete {
                 background-color: rgb(253, 82, 82);
                 color: white;
                 transition: 0.3s ease-in-out all;

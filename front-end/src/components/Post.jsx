@@ -3,6 +3,8 @@ import { format, formatISO9075 } from "date-fns"
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Image } from './Image'
 
 
 export const Post = ({ post, isLoading }) => {
@@ -13,10 +15,11 @@ export const Post = ({ post, isLoading }) => {
             <div className='image'>
                 <Link to={`/post/${post._id}`}  >
                     {/* <img src={`http://localhost:4000/${post?.photo}`} alt="" /> */}
-                    <LazyLoadImage
-                        src={`http://localhost:4000/${post?.photo}`}
-                        alt=""
-                        effect="blur"
+                    <Image
+                        compressedSrc={`compressed-${post?.photo}`}
+                        originalSrc={post?.photo}
+                        imageClass="postImage"
+
                     />
                 </Link>
             </div>
@@ -32,7 +35,9 @@ export const Post = ({ post, isLoading }) => {
                         </div>
                     </Link>
                 </div>
-                <p className='summary'> {post?.summary} </p>
+                <p className='summary'> {post?.summary} ... </p>
+
+                <Link to={`/post/${post._id}`} className='readMore'> <p>Read More</p> </Link>
             </div>
         </motion.div>
     )

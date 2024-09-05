@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { useErrorContext } from '../hooks/useErrorContext';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { getUser } from '../apis/user';
 import { getPosts } from '../apis/post';
 import { PostSkelton } from '../Skeltons/PostSkelton';
@@ -14,11 +14,21 @@ import { ProfileSkeleton } from '../Skeltons/ProfileSkeleton';
 
 export const Profile = () => {
     const { id } = useParams();
-    const limit = 5;
+    const limit = 2;
 
-    const { data: posts, isLoading: postsLoading } = useQuery({
-        queryKey: ['posts', id, limit],
-        queryFn: () => getPosts(id, limit),
+    const {
+        data: posts,
+        isLoading: postsLoading,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        error
+    } = useInfiniteQuery({
+        queryKey: ['posts'],
+        queryFn: ({ pageParam = 1 }) => getPosts({ limit, page: pageParam, author: id }),
+        getNextPageParam: (lastPage, allPages) => {
+            return lastPage.hasMore ? allPages.length + 1 : undefined;
+        }
     })
 
     const { data: user, isLoading: userLoading } = useQuery({
@@ -51,8 +61,10 @@ export const Profile = () => {
                 <h1>Latest Posts</h1>
                 <div className='posts'>
                     {
-                        posts?.map(post => {
-                            return <Post key={post._id} post={post} />
+                        posts?.pages?.map((page, index) => {
+                            return page.posts.map((post) => {
+                                return <Post key={post._id} post={post} />
+                            })
                         })
                     }
                     {
@@ -60,8 +72,15 @@ export const Profile = () => {
                             return <PostSkelton key={n} />
                         })
                     }
-
                 </div>
+                {
+                    hasNextPage &&
+                    <p className='loadMore' onClick={fetchNextPage} disabled={isFetchingNextPage}>View more posts</p>
+                }
+
+                {
+                    isFetchingNextPage && <PostSkelton />
+                }
             </div>
         </motion.section >
     )

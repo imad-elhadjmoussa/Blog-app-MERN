@@ -12,6 +12,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { PostDetailsSkelton } from '../Skeltons/PostDetailsSkelton';
 import { Error } from '../components/Error';
 import { deletePost, getPost, getPosts } from '../apis/post';
+import { Image } from '../components/Image';
 
 export const PostDetails = () => {
     const { id } = useParams();
@@ -85,7 +86,9 @@ export const PostDetails = () => {
 
             </div>
 
-            <img className='postPhoto' src={`http://localhost:4000/${post?.photo}`} alt="" />
+            <div className='postImageContainer'>
+                <Image compressedSrc={`compressed-${post?.photo}`} originalSrc={post?.photo} imageClass="postImage" />
+            </div>
 
             <div className='post'>
                 <h1 className='title'>{post?.title}</h1>

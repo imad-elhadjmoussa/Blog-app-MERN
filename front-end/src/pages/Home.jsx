@@ -16,10 +16,9 @@ export const Home = () => {
             queryKey: ['posts'],
             queryFn: ({ pageParam = 1 }) => getPosts({ limit, page: pageParam }),
             getNextPageParam: (lastPage, allPages) => {
-                return lastPage.hasMore ? allPages.length + 1 : undefined;
+                return lastPage?.hasMore ? allPages.length + 1 : undefined;
             }
         },
-        
     )
 
     if (error) {
