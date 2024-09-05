@@ -1,5 +1,6 @@
 require('express-async-errors');
 const Post = require('./../modules/post.shema');
+const compressFile = require('./../middlewares/compressFile');
 
 const createPost = async (req, res) => {
     const { title, summary, content, photo } = req.body;
@@ -19,8 +20,10 @@ const getPosts = async (req, res) => {
     const { skip, limit, page, hasMore } = req.pagination;
     const { author } = req.query;
     if (author) {
+        const total = await Post.find({ author }).countDocuments();
+        const hasMore = total > page * limit;
         const posts = await Post.find({ author }).skip(skip).populate("author").sort({ date: -1 }).limit(parseInt(limit));
-        return res.json({ success: "success", message: "Posts fetched successfully", data: { posts: posts, hasMore }});
+        return res.json({ success: "success", message: "Posts fetched successfully", data: { posts: posts, hasMore } });
     }
     const posts = await Post.find().skip(skip).populate("author").sort({ date: -1 }).limit(limit);
     res.json({ success: "success", message: "Posts fetched successfully", data: { posts: posts, hasMore } });
