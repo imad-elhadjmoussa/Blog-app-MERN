@@ -1,30 +1,21 @@
 export const getPosts = async (params) => {
-    try {
-        const query = new URLSearchParams(params).toString();
-        const res = await fetch(`http://localhost:4000/posts?${query}`);
-        const data = await res.json();
-        if (!res.ok) {
-            throw new Error(data.message);
-        }
-        console.log(data);
-        return data.data;
-    } catch (error) {
-        console.log(error.message);
+    const query = new URLSearchParams(params).toString();
+    const res = await fetch(`http://localhost:4000/posts?${query}`);
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(data.message);
     }
+    return data.data;
 }
 
 
 export const getPost = async (id) => {
-    try {
-        const res = await fetch(`http://localhost:4000/posts/${id}`);
-        const data = await res.json();
-        if (!res.ok) {
-            throw new Error(data.message);
-        }
-        return data.data.post;
-    } catch (error) {
-        console.log(error.message);
+    const res = await fetch(`http://localhost:4000/posts/${id}`);
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(data.message);
     }
+    return data.data.post;
 }
 
 export const createPost = async (post) => {
@@ -33,35 +24,29 @@ export const createPost = async (post) => {
     formData.append('summary', post.summary);
     formData.append('photo', post.photo);
     formData.append('content', post.content);
-    try {
-        const res = await fetch(`http://localhost:4000/posts`, {
-            method: 'POST',
-            body: formData,
-            credentials: 'include',
-        });
-        const data = await res.json();
-        if (!res.ok) {
-            throw new Error(data.message);
-        }
-        return data.data.post;
-    } catch (error) {
-        console.log(error.message);
+    const res = await fetch(`http://localhost:4000/posts`, {
+        method: 'POST',
+        body: formData,
+        credentials: 'include',
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(data.message);
     }
+    return data.data.post;
 }
 
 export const deletePost = async (id) => {
-    try {
-        const res = await fetch(`http://localhost:4000/posts/${id}`, {
-            method: 'DELETE',
-            credentials: 'include',
-        });
-        if (!res.ok) {
-            throw new Error('Something went wrong!');
-        }
-        return res.ok;
-    } catch (error) {
-        console.log(error.message);
+    const res = await fetch(`http://localhost:4000/posts/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+    });
+    if (!res.ok) {
+        const data = await res.json();
+        console.log(data);
+        throw new Error(data.message);
     }
+    return res.ok;
 }
 
 export const editPost = async (id, post) => {
@@ -70,18 +55,14 @@ export const editPost = async (id, post) => {
     formData.append('summary', post.summary);
     formData.append('photo', post.photo);
     formData.append('content', post.content);
-    try {
-        const res = await fetch(`http://localhost:4000/posts/${id}`, {
-            method: 'PATCH',
-            body: formData,
-            credentials: 'include',
-        });
-        const data = await res.json();
-        if (!res.ok) {
-            throw new Error(data.message);
-        }
-        return data.data.post;
-    } catch (error) {
-        console.log(error.message);
+    const res = await fetch(`http://localhost:4000/posts/${id}`, {
+        method: 'PATCH',
+        body: formData,
+        credentials: 'include',
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(data.message);
     }
+    return data.data.post;
 }

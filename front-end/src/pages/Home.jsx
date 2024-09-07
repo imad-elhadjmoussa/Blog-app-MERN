@@ -24,11 +24,6 @@ export const Home = () => {
     if (error) {
         return <Error error={error.message} />
     }
-
-    if(!isLoading){
-        console.log(posts);
-    }
-
     return (
         <section className='home'>
             {

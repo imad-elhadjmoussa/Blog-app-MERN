@@ -30,9 +30,23 @@
             background-color: rgb(253, 82, 82);
             color: white;
             transition: 0.3s ease-in-out all;
+            padding: 13px;
+            border-radius: 50%;
 
             &:hover {
                 background-color: darken(rgb(255, 71, 71), $amount: 5%);
+            }
+        }
+
+        .editBtn {
+            background-color: $color-primary;
+            color: white;
+            transition: 0.3s ease-in-out all;
+            padding: 13px;
+            border-radius: 50%;
+
+            &:hover {
+                background-color: lighten($color-primary, $amount: 20%);
             }
         }
     }
@@ -81,7 +95,11 @@
         gap: 1.5rem;
 
         .title {
-            font-size: 3.2rem;
+            @include media-breakpoint(md) {
+                font-size: 3.5rem;
+            }
+
+            font-size: 2.5rem;
             font-weight: 500;
             color: $color-primary;
             text-align: start;
@@ -90,11 +108,16 @@
         }
 
         .summary {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: $color-secondary;
             width: 100%;
             line-height: 1.6;
             font-weight: 500;
+
+            @include media-breakpoint(md) {
+                font-size: 1.3rem;
+            }
+
         }
 
         .content {

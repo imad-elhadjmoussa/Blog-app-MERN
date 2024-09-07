@@ -36,6 +36,8 @@ export const Profile = () => {
         queryFn: () => getUser(id),
     })
 
+    console.log(posts?.pages[0]?.posts?.length);
+
     return (
         <motion.section
             className='profile'
@@ -58,7 +60,12 @@ export const Profile = () => {
             }
 
             <div className='latestPosts'>
-                <h1>Latest Posts</h1>
+                {
+                    posts?.pages[0]?.posts?.length === 0 ?
+                        <h1>No posts found</h1>
+                        :
+                        <h1>Latest Posts</h1>
+                }
                 <div className='posts'>
                     {
                         posts?.pages?.map((page, index) => {
@@ -67,6 +74,7 @@ export const Profile = () => {
                             })
                         })
                     }
+
                     {
                         postsLoading && [1, 2].map((n) => {
                             return <PostSkelton key={n} />

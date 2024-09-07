@@ -32,29 +32,29 @@ export const EditPost = () => {
     }
 
 
-    const { mutate: editPostMutate } = useMutation({
-        mutationFn: () => editPost(id, {...post, content: value}),
+    const { mutate: editPostMutate,error:editError } = useMutation({
+        mutationFn: () => editPost(id, { ...post, content: value }),
         onSuccess: () => {
             navigation(`/post/${id}`);
         }
     })
 
-    const {  error,isLoading } = useQuery({
+    const { error:fetchError, isLoading } = useQuery({
         queryKey: ['post'],
-        queryFn: async() => {
-            const data =await getPost(id);
+        queryFn: async () => {
+            const data = await getPost(id);
             setPost(data)
             setValue(data.content)
             return data;
         },
     })
 
-    if(isLoading){
-        return <Loading/>
+    if (isLoading) {
+        return <Loading />
     }
 
-    if (error) {
-        return <Error error={error.message} />
+    if (fetchError) {
+        return <Error error={fetchError.message} />
     }
 
 
@@ -65,6 +65,9 @@ export const EditPost = () => {
             animate={{ opacity: 1 }}
 
         >
+            {
+                editError && <Error error={editError.message} />
+            }
             <h1 className='title'>
                 Edit Poste
             </h1>
@@ -77,16 +80,8 @@ export const EditPost = () => {
                     <input className="input" type="text" name='summary' placeholder="summary" onChange={(e) => { handleChange(e) }} value={post?.summary} />
                 </div>
 
-                <div className="file-input postPicture ">
-                    <input type="file" id="file" className="file-input__input" name='photo' onChange={(e) => { handleChange(e) }} />
-                    <label htmlFor="file" className="file-input__label"  >
-                        <svg className='file-input__icon' xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" viewBox="0 0 24 24">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                            <circle cx="8.5" cy="8.5" r="1.5" />
-                            <path d="M21 15l-5-5L5 21" />
-                        </svg>
-                        <span>post picture</span>
-                    </label>
+                <div className="postPicture">
+                    <input type="file" id="file" placeholder='Cc' className="input" name='photo' accept="image/*" onChange={(e) => { handleChange(e) }} />
                 </div>
 
                 <div>
@@ -95,9 +90,11 @@ export const EditPost = () => {
 
                 <div className='btns'>
                     <button type='button' onClick={editPostMutate} className="btn create">Edit Post</button>
-                    <Link to="/" className="btn reset" >
-                        Cancel
-                    </Link>
+                    <button className="btn reset"   >
+                        <Link to={`/post/${id}`}  >
+                            Cancel
+                        </Link>
+                    </button>
                 </div>
             </form>
         </motion.section>

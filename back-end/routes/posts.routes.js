@@ -8,12 +8,9 @@ const paginatedModel = require('../middlewares/paginationMiddleware');
 
 const Post = require('./../modules/post.shema');
 
-const upload = require('./../functions/uploadPost');
+const upload = require('./../middlewares/uploadPost');
 
 const compressFile = require('./../middlewares/compressFile');
-
-const multer = require('multer');
-const path = require('path');
 
 router.post('/', verifyToken, upload.single("photo"), compressFile, postsController.createPost);
 
@@ -21,7 +18,7 @@ router.get('/', paginatedModel(Post), postsController.getPosts);
 
 router.get('/:id', postsController.getPost);
 
-router.patch('/:id', verifyToken, upload.single("photo"), postsController.updatePost);
+router.patch('/:id', verifyToken, upload.single("photo"), compressFile, postsController.updatePost);
 
 router.delete('/:id', verifyToken, postsController.deletePost);
 

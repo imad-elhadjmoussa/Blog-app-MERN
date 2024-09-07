@@ -24,7 +24,7 @@ export const PostDetails = () => {
         queryFn: () => getPost(id),
     });
 
-    const { mutate: deletePostMutate } = useMutation({
+    const { mutate: deletePostMutate,error:deleteError,isPending:pendingDelete } = useMutation({
         mutationFn: (id) => deletePost(id),
         onSuccess: () => {
             setConfirmDelete(false);
@@ -36,8 +36,8 @@ export const PostDetails = () => {
         return <PostDetailsSkelton />
     }
 
-    if (error) {
-        return <Error error={error.message} />
+    if (error || deleteError) {
+        return <Error error={error?.message || deleteError?.message } />
     }
 
 
@@ -52,19 +52,16 @@ export const PostDetails = () => {
                 (user?.id === post?.author?._id) &&
                 <div className='edit'>
                     <Link to={`/post/edit/${id}`}>
-                        <button className='btn'>
+                        <button className='btn editBtn'>
                             <span>
-                                <FontAwesomeIcon icon={faPenToSquare} />
+                                <FontAwesomeIcon width={"20px"} height={"20px"} icon={faPenToSquare} />
                             </span>
-                            <span>
-                                Edit Post
-                            </span>
+                            
                         </button>
                     </Link>
 
                     <button onClick={() => { setConfirmDelete(true) }} className='btn delete'>
-                        <FontAwesomeIcon icon={faTrash} />
-                        <span>Delete Post</span>
+                        <FontAwesomeIcon width={"20px"} height={"20px"} icon={faTrash} />
                     </button>
                 </div>
             }
@@ -109,10 +106,10 @@ export const PostDetails = () => {
                     exit={{ opacity: 0 }}
                 >
                     <div className='box'>
-                        <p>Do you want to delete his post?</p>
+                        <p>Do you want to delete this post?</p>
                         <div className='btns'>
-                            <button onClick={() => { deletePostMutate(post?._id) }} className='btn delete'>Delete</button>
-                            <button className='btn cancel' onClick={() => { setConfirmDelete(false) }}>Cancel</button>
+                            <button disabled={pendingDelete} onClick={() => { deletePostMutate(post?._id) }} className='btn delete'>Delete</button>
+                            <button disabled={pendingDelete} className='btn cancel' onClick={() => { setConfirmDelete(false) }}>Cancel</button>
                         </div>
                     </div>
                 </motion.div>

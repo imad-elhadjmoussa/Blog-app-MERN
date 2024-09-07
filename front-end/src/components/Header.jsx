@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useAuth } from './../hooks/useAuth';
 import { useLogout } from '../hooks/useLogout';
 import { Skeleton } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export const Header = () => {
 
@@ -35,7 +36,7 @@ export const Header = () => {
                         }
 
                         <Link to="/" >
-                            <button onClick={logout} className='btn logout'>Logout</button>
+                            <button onClick={logout} className='btn logout'> Logout </button>
                         </Link>
 
                     </div>

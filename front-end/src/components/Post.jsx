@@ -11,6 +11,7 @@ export const Post = ({ post, isLoading }) => {
     return (
         <motion.div
             className='post'
+            
         >
             <div className='image'>
                 <Link to={`/post/${post._id}`}  >
@@ -37,7 +38,7 @@ export const Post = ({ post, isLoading }) => {
                 </div>
                 <p className='summary'> {post?.summary} ... </p>
 
-                <Link to={`/post/${post._id}`} className='readMore'> <p>Read More</p> </Link>
+                <Link to={`/post/${post?._id}`} className='readMore'> <p>Read More</p> </Link>
             </div>
         </motion.div>
     )

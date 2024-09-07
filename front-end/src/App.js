@@ -14,8 +14,7 @@ import { useAuth } from "./hooks/useAuth";
 
 function App() {
 
-  const { user } = useAuth();
-
+  const { user, } = useAuth();
 
   return (
     <main className="container">

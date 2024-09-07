@@ -30,8 +30,6 @@ export const AuthProvider = ({ children }) => {
         user: null,
     });
 
-    // const [loading, setLoading] = useState(true);
-
     const profile = async () => {
         try {
             const res = await fetch('http://localhost:4000/users/profile', {
@@ -40,26 +38,22 @@ export const AuthProvider = ({ children }) => {
             })
             if (!res.ok) {
                 dispatch({ type: 'LOGOUT' });
-                // setLoading(false);
+                return null;
             }
             if (res.ok) {
                 const data = await res.json();
                 dispatch({ type: 'LOGIN', payload: data.data.user });
-                // setLoading(false);
+                return data.data.user;
             }
         } catch (error) {
             console.log(error.message);
-            // setLoading(false);
         }
     }
-    // useEffect(() => {
-    //     profile();
-    // }
-    //     , []);
 
     const { isLoading } = useQuery({
-        queryKey: 'profile',
+        queryKey: ['profile'],
         queryFn: profile,
+
 
     })
 

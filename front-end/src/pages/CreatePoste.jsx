@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
 import { appContext } from '../App';
@@ -7,10 +7,10 @@ import { motion } from 'framer-motion';
 import { useErrorContext } from '../hooks/useErrorContext';
 import { useMutation } from '@tanstack/react-query';
 import { createPost } from '../apis/post';
+import { Error } from '../components/Error';
 
 export const CreatePoste = () => {
 
-    const { setError } = useErrorContext();
     const navigation = useNavigate();
 
     const [value, setValue] = React.useState('');
@@ -28,11 +28,12 @@ export const CreatePoste = () => {
         setPost({ ...post, [e.target.name]: e.target.value });
     }
 
-    const { mutate: cratePostMutate,isPending } = useMutation({
+    const { mutate: cratePostMutate, isPending, error } = useMutation({
         mutationFn: () => createPost({ ...post, content: value }),
         onSuccess: () => {
             navigation('/')
-        }
+        },
+
     })
 
 
@@ -43,8 +44,11 @@ export const CreatePoste = () => {
             animate={{ opacity: 1 }}
 
         >
+            {
+                error && <Error error={error.message} />
+            }
             <h1 className='title'>
-                Create Poste
+                Create Post
             </h1>
             <form encType="multipart/form-data">
                 <div >

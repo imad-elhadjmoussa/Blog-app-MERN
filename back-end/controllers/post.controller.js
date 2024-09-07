@@ -1,11 +1,19 @@
 require('express-async-errors');
 const Post = require('./../modules/post.shema');
 const compressFile = require('./../middlewares/compressFile');
+const CustomError = require('./../utils/CustomError');
+const fs = require('fs');
+const path = require('path');
+
 
 const createPost = async (req, res) => {
     const { title, summary, content, photo } = req.body;
 
     const { id } = req.user;
+    const emptyFields = Object.keys(req.body).filter(key => req.body[key] === '');
+    if (emptyFields.length > 0) {
+        throw new CustomError(`Please fill in the following fields: ${emptyFields.join(', ')}`, 400);
+    }
     const post = await Post.create({
         title,
         summary,
@@ -32,12 +40,20 @@ const getPosts = async (req, res) => {
 const getPost = async (req, res) => {
     const { id } = req.params;
     const post = await Post.findById(id).populate("author");
+    if (!post) {
+        throw new CustomError("Post not found", 404);
+    }
     res.json({ success: "success", message: "Post fetched successfully", data: { post } });
 }
 
 const updatePost = async (req, res) => {
     const { id } = req.params;
     const { title, summary, content, photo } = req.body;
+    console.log(photo);
+    const emptyFields = Object.keys(req.body).filter(key => req.body[key] === '');
+    if (emptyFields.length > 0) {
+        throw new CustomError(`Please fill in the following fields: ${emptyFields.join(', ')}`, 400);
+    }
     const post = await Post.findByIdAndUpdate(id, {
         title,
         summary,

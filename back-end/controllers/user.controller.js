@@ -8,7 +8,6 @@ const validator = require('validator');
 
 const register = async (req, res) => {
     const { username, email, password, avatar } = req.body;
-    console.log(req.body);
     const emptyFields = Object.keys(req.body).filter(key => req.body[key] === '' && key !== 'avatar');
     if (emptyFields.length > 0) {
         const fieldsList = emptyFields.join(', ');

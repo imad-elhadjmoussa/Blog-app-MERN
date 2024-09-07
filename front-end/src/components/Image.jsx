@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 import React, { useState } from 'react'
 
 
-export const Image = ({ compressedSrc, originalSrc,imageClass }) => {
+export const Image = ({ compressedSrc, originalSrc, imageClass }) => {
     const [highResLoaded, setHighResLoaded] = useState(false);
     return (
         <div
             style={{
-                backgroundImage: `url(http://localhost:4000/${compressedSrc})`,
+                backgroundImage: !highResLoaded && `url(http://localhost:4000/${compressedSrc})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 height: '100%',
@@ -19,7 +19,7 @@ export const Image = ({ compressedSrc, originalSrc,imageClass }) => {
                 alt=""
                 style={{
                     opacity: highResLoaded ? 1 : 0,
-                    
+
                     filter: highResLoaded ? 'blur(0px)' : 'blur(100px)',
                     transition: ' opacity 500ms',
                     height: '100%',
