@@ -13,7 +13,7 @@ const cookieParser = require('cookie-parser');
 app.use(express.json());
 app.use(CORS({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: "https://blog-app-mern-i7ty.onrender.com",
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'uploads',"posts")));
