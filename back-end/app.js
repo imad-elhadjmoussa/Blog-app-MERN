@@ -31,6 +31,10 @@ app.use(express.static(path.join(__dirname, 'uploads',"users")));
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
 
+app.get("/",(req,res)=>{
+    res.send("Welcom to blog app");
+})
+
 app.use(errorHandler);
 
 connectDB(process.env.MONGO_URL);
