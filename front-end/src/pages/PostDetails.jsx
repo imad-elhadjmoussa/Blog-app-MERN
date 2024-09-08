@@ -1,13 +1,10 @@
 import { formatISO9075 } from 'date-fns';
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { appContext } from '../App';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
-import { useErrorContext } from '../hooks/useErrorContext';
 import { useAuth } from '../hooks/useAuth';
-import useFetch from '../hooks/useFetch';
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { PostDetailsSkelton } from '../Skeltons/PostDetailsSkelton';
 import { Error } from '../components/Error';

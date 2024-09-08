@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
     const profile = async () => {
         try {
-            const res = await fetch('http://localhost:4000/users/profile', {
+            const res = await fetch(`${url}/api/users/profile`, {
                 method: 'GET',
                 credentials: 'include',
             })

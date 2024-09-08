@@ -1,7 +1,8 @@
+import { url } from "../utils/url";
 
 export const login = async (user) => {
 
-    const res = await fetch('http://localhost:4000/users/login', {
+    const res = await fetch(`${url}/api/users/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -23,7 +24,7 @@ export const register = async (user) => {
     formData.append('email', user.email);
     formData.append('password', user.password);
     formData.append('avatar', user.avatar);
-    const res = await fetch('http://localhost:4000/users/register', {
+    const res = await fetch(`${url}/api/users/register`, {
         method: 'POST',
         body: formData,
         credentials: 'include',
@@ -36,7 +37,7 @@ export const register = async (user) => {
 }
 
 export const getUser = async (id) => {
-    const res = await fetch(`http://localhost:4000/users/${id}`, {
+    const res = await fetch(`${url}/api/users/${id}`, {
         credentials: 'include',
     });
     const data = await res.json();

@@ -1,3 +1,4 @@
+import { url } from "../utils/url";
 import { useAuth } from "./useAuth";
 import { useErrorContext } from "./useErrorContext";
 
@@ -9,7 +10,7 @@ export const useLogout = () => {
     const logout = async () => {
 
         try {
-            const res = await fetch('http://localhost:4000/users/logout', {
+            const res = await fetch(`${url}/api/users/logout`, {
                 method: 'POST',
                 credentials: 'include',
             })

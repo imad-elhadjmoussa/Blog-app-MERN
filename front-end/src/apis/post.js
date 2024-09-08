@@ -1,6 +1,8 @@
+import { url } from "../utils/url";
+
 export const getPosts = async (params) => {
     const query = new URLSearchParams(params).toString();
-    const res = await fetch(`http://localhost:4000/posts?${query}`);
+    const res = await fetch(`${url}/api/posts?${query}`);
     const data = await res.json();
     if (!res.ok) {
         throw new Error(data.message);
@@ -10,7 +12,7 @@ export const getPosts = async (params) => {
 
 
 export const getPost = async (id) => {
-    const res = await fetch(`http://localhost:4000/posts/${id}`);
+    const res = await fetch(`${url}/api/posts/${id}`);
     const data = await res.json();
     if (!res.ok) {
         throw new Error(data.message);
@@ -24,7 +26,7 @@ export const createPost = async (post) => {
     formData.append('summary', post.summary);
     formData.append('photo', post.photo);
     formData.append('content', post.content);
-    const res = await fetch(`http://localhost:4000/posts`, {
+    const res = await fetch(`${url}/api/posts`, {
         method: 'POST',
         body: formData,
         credentials: 'include',
@@ -37,7 +39,7 @@ export const createPost = async (post) => {
 }
 
 export const deletePost = async (id) => {
-    const res = await fetch(`http://localhost:4000/posts/${id}`, {
+    const res = await fetch(`${url}/api/posts/${id}`, {
         method: 'DELETE',
         credentials: 'include',
     });
@@ -55,7 +57,7 @@ export const editPost = async (id, post) => {
     formData.append('summary', post.summary);
     formData.append('photo', post.photo);
     formData.append('content', post.content);
-    const res = await fetch(`http://localhost:4000/posts/${id}`, {
+    const res = await fetch(`${url}/api/posts/${id}`, {
         method: 'PATCH',
         body: formData,
         credentials: 'include',

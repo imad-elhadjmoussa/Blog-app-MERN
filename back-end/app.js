@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const errorHandler = require('./middlewares/errorHandler');
 const CORS = require('cors');
+const path = require('path');
 const userRouter = require('./routes/users.routes');
 const postRouter = require('./routes/posts.routes');
 const connectDB = require('./database/cn.db');
@@ -15,16 +16,11 @@ app.use(CORS({
     origin: "http://localhost:3000",
 }));
 app.use(cookieParser());
-app.use(express.static('uploads/posts'));
-app.use(express.static('uploads/users'));
+app.use(express.static(path.join(__dirname, 'uploads',"posts")));
+app.use(express.static(path.join(__dirname, 'uploads',"users")));
 
-app.use('/users', userRouter);
-app.use('/posts', postRouter);
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
+app.use('/api/users', userRouter);
+app.use('/api/posts', postRouter);
 
 app.use(errorHandler);
 
