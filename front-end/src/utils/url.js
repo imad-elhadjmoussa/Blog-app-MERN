@@ -1,1 +1,1 @@
-export const url = 'http://localhost:4000';
+export const url = 'https://blog-app-mern-7a8y.onrender.com';
