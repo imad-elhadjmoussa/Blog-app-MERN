@@ -9,11 +9,20 @@ const postRouter = require('./routes/posts.routes');
 const connectDB = require('./database/cn.db');
 const cookieParser = require('cookie-parser');
 
-
+const allowedOrigins=[
+    "https://blog-app-mern-i7ty.onrender.com"
+]
 app.use(express.json());
 app.use(CORS({
+    origin: (origin, callback) => {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
     credentials: true,
-    origin: "https://blog-app-mern-i7ty.onrender.com",
+    optionsSuccessStatus: 200
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'uploads',"posts")));
