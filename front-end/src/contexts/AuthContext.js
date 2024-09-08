@@ -1,7 +1,8 @@
 import { createContext, useEffect, useReducer, useState } from 'react';
+import { url } from '../utils/url';
 import { useQuery } from '@tanstack/react-query';
 export const AuthContext = createContext();
-import { url } from '../utils/url';
+
 
 
 export const AUTH_ACTIONS = {
