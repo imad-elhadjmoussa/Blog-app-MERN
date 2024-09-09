@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Image } from './Image'
+import { url } from '../utils/url';
 
 
 export const Post = ({ post, isLoading }) => {
@@ -29,7 +30,7 @@ export const Post = ({ post, isLoading }) => {
                 <h2 className='title'> {post?.title} </h2>
                 <div className="info">
                     <Link className='author' to={`/profile/${post.author._id}`}  >
-                        <img className="avatar" src={`http://localhost:4000/${post?.author?.avatar}`} alt="" />
+                        <img className="avatar" src={`${url}/${post?.author?.avatar}`} alt="" />
                         <div className='dateUsername'>
                             <p className='username'> {post?.author?.username} </p>
                             <p className='date'> {format(new Date(post?.date), "dd MMM yyyy")} </p>
