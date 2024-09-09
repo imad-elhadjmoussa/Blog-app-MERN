@@ -32,7 +32,7 @@ app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
 
 app.get("/",(req,res)=>{
-    res.send("Welcom to blog app");
+    res.send("Welcom to mern blog app");
 })
 
 app.use(errorHandler);
