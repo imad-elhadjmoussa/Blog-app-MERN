@@ -11,6 +11,7 @@ import { getUser } from '../apis/user';
 import { getPosts } from '../apis/post';
 import { PostSkelton } from '../Skeltons/PostSkelton';
 import { ProfileSkeleton } from '../Skeltons/ProfileSkeleton';
+import { url } from '../utils/url';
 
 export const Profile = () => {
     const { id } = useParams();
@@ -48,7 +49,7 @@ export const Profile = () => {
                     :
                     <div className='info'>
                         <div className='profileImage'>
-                            <img src={`http://localhost:4000/${user?.avatar}`} alt={user?.username} />
+                            <img src={`${url}/${user?.avatar}`} alt={user?.username} />
                         </div>
                         <div>
                             <h1> {user?.username} </h1>
