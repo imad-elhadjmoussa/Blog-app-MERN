@@ -10,6 +10,7 @@ import { PostDetailsSkelton } from '../Skeltons/PostDetailsSkelton';
 import { Error } from '../components/Error';
 import { deletePost, getPost, getPosts } from '../apis/post';
 import { Image } from '../components/Image';
+import { url } from '../utils/url';
 
 export const PostDetails = () => {
     const { id } = useParams();
@@ -66,7 +67,7 @@ export const PostDetails = () => {
             <div className='postInfo'>
                 <Link to={`/profile/${post?.author?._id}`}>
                     <div className='author'>
-                        <img src={`http://localhost:4000/${post?.author?.avatar}`} alt="" />
+                        <img src={`${url}/${post?.author?.avatar}`} alt="" />
                         <p>{post?.author?.username}</p>
                     </div>
                 </Link>
