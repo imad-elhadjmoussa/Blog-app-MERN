@@ -32,7 +32,7 @@ export const Header = () => {
                             <Skeleton className='avatar' variant="circular" width={40} height={40} /> 
                             :
                             <Link className='avatar' to={`profile/${user.id}`} >
-                                <img src={`http://localhost:4000/${user?.avatar}`} alt="" />
+                                <img src={`${url}/${user?.avatar}`} alt="" />
                             </Link>
                         }
 
