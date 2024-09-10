@@ -13,6 +13,7 @@ const allowedOrigins=[
     "https://blog-app-mern-i7ty.onrender.com"
 ]
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(CORS({
     origin:  "https://blog-app-mern-i7ty.onrender.com",
     origin: true,
