@@ -14,16 +14,9 @@ const allowedOrigins=[
 ]
 app.use(express.json());
 app.use(CORS({
-    origin: (origin, callback) => {
-        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    },
+    origin:  "https://blog-app-mern-i7ty.onrender.com",
     origin: true,
     credentials: true,
-    optionsSuccessStatus: 200
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'uploads',"posts")));
