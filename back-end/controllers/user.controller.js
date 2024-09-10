@@ -27,7 +27,7 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     const user = await User.create({ username, email, password: hashedPassword, avatar });
     const token = jwt.sign({ id: user._id, email: user.email, username: user.username, avatar: user.avatar }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none',domain: '.onrender.com' });
+    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none',domain: '.onrender.com',  maxAge: 24 * 60 * 60 * 1000 });
     res.status(201).json({ message: 'User created', data: { user: { username: user.username, avatar: user.avatar, email: user.email, id: user._id } }, success: "succuss" });
 }
 
